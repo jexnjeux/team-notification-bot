@@ -56,7 +56,7 @@ function createMessage(unavailableMembers) {
                 return `• *${name}* — ${formatDate(startDate)}`;
             }
 
-            return `• *${name}* — ${formatDate(startDate)} ~ ${formatDate(endDate)}`;
+            return `• *${name}* — ~ ${formatDate(endDate)}`;
         }
     );
 
