@@ -1,0 +1,8 @@
+{
+    "name": "team-availability-bot",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node src/notify.js"
+    }
+}
