@@ -53,10 +53,10 @@ function createMessage(unavailableMembers) {
     const lines = unavailableMembers.map(
         ({ name, startDate, endDate }) => {
             if (startDate === endDate) {
-                return `• *${name}* — ${formatDate(startDate)}`;
+                return `• *${name}*`;
             }
 
-            return `• *${name}* — ~ ${formatDate(endDate)}`;
+            return `• *${name}* (~${formatDate(endDate)})`;
         }
     );
 
@@ -65,7 +65,7 @@ function createMessage(unavailableMembers) {
         "",
         ...lines,
         "",
-        "일정에 참고해주세요 🙂",
+        "일정에 참고해 주세요 🙂",
     ].join("\n");
 }
 
