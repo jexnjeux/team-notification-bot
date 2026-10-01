@@ -1,13 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
-const vacationsPath = path.join(
+const availabilityPath = path.join(
     __dirname,
-    "../data/vacations.json"
+    "../data/availability.json"
 );
 
-const vacations = JSON.parse(
-    fs.readFileSync(vacationsPath, "utf-8")
+const availability = JSON.parse(
+    fs.readFileSync(availabilityPath, "utf-8")
 );
 
 const webhookUrl = process.env.SLACK_WEBHOOK_URL;
@@ -40,8 +40,8 @@ function formatDate(date) {
 /**
  * 오늘 연락 어려운 사람 찾기
  */
-function getTodayVacations(today) {
-    return vacations.filter(({ startDate, endDate }) => {
+function getTodayAvailability(today) {
+    return availability.filter(({ startDate, endDate }) => {
         return startDate <= today && today <= endDate;
     });
 }
@@ -96,14 +96,14 @@ async function main() {
 
     console.log(`오늘 날짜: ${today}`);
 
-    const todayVacations = getTodayVacations(today);
+    const todayAvailability = getTodayAvailability(today);
 
-    if (todayVacations.length === 0) {
+    if (todayAvailability.length === 0) {
         console.log("오늘 연락이 어려운 팀원이 없습니다.");
         return;
     }
 
-    const message = createMessage(todayVacations);
+    const message = createMessage(todayAvailability);
 
     console.log(message);
 
