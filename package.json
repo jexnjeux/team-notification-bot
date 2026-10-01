@@ -1,5 +1,5 @@
 {
-    "name": "team-availability-bot",
+    "name": "team-notification-bot",
     "version": "1.0.0",
     "private": true,
     "scripts": {
