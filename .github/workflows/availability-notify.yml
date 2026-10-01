@@ -2,7 +2,7 @@ name: Availability Notification
 
 on:
   schedule:
-    - cron: "0 9 * * 1-5"
+    - cron: "30 9 * * 1-5"
       timezone: "Asia/Seoul"
 
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Send vacation notification
+      - name: Send availability notification
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: node src/notify.js
