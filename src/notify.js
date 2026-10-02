@@ -49,10 +49,11 @@ function getTodayAvailability(today) {
 /**
  * Slack 메시지 생성
  */
-function createMessage(unavailableMembers) {
+function createMessage(unavailableMembers, today) {
     const lines = unavailableMembers.map(
-        ({ name, startDate, endDate }) => {
-            if (startDate === endDate) {
+        ({ name, endDate }) => {
+            // 오늘이 마지막 날이면 종료일 생략
+            if (endDate === today) {
                 return `• *${name}*`;
             }
 
@@ -103,7 +104,7 @@ async function main() {
         return;
     }
 
-    const message = createMessage(todayAvailability);
+    const message = createMessage(todayAvailability, today);
 
     console.log(message);
 
