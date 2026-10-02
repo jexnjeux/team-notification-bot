@@ -1,11 +1,8 @@
 name: Availability Notification
 
+# GitHub schedule 트리거가 동작하지 않아 외부 스케줄러(cron-job.org)가
+# 매일 09:00 KST에 workflow_dispatch API를 호출해 실행한다. (README 참고)
 on:
-  schedule:
-    - cron: "0 9 * * *"
-      timezone: "Asia/Seoul"
-    - cron: "*/10 * * * *" # 테스트용 (UTC), 확인 후 제거
-
   workflow_dispatch:
 
 jobs:
@@ -21,12 +18,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Test schedule trigger
-        if: github.event.schedule == '*/10 * * * *'
-        run: echo "테스트 cron 트리거 확인 (Slack 전송 안 함)"
-
       - name: Send availability notification
-        if: github.event.schedule != '*/10 * * * *'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: node src/notify.js
