@@ -21,7 +21,12 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Test schedule trigger
+        if: github.event.schedule == '*/10 * * * *'
+        run: echo "테스트 cron 트리거 확인 (Slack 전송 안 함)"
+
       - name: Send availability notification
+        if: github.event.schedule != '*/10 * * * *'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: node src/notify.js
